@@ -1,0 +1,334 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/*
+ * ALTRION ADVISORY — design tokens.
+ *
+ * Palette Option A ("From the Logo") is active below.
+ * Palette Option B ("Business-Representative") is defined but commented out:
+ * to switch, comment the Option A block and uncomment the Option B block.
+ * Nothing else in the codebase hardcodes a hex value.
+ */
+
+:root {
+  /* ---- Option A — From the Logo (ACTIVE) ---- */
+  --altrion-ink: #16202b;
+  --altrion-parchment: #f4f1ea;
+  --altrion-line: rgba(22, 32, 43, 0.15);
+  --altrion-stone: #e4dfd3;
+  --altrion-accent: #a6875a;
+
+  /* ---- Option B — Business-Representative (INACTIVE) ----
+  --altrion-ink: #2E3944;            // slate
+  --altrion-parchment: #F4F1EA;
+  --altrion-line: rgba(46, 57, 68, 0.15);
+  --altrion-stone: #E4DFD3;
+  --altrion-steel: #6E8299;
+  --altrion-accent: #A6875A;
+  ---------------------------------------------------------- */
+
+  --radius: 0px;
+
+  /* shadcn semantic mappings, all derived from the Altrion tokens */
+  --background: var(--altrion-parchment);
+  --foreground: var(--altrion-ink);
+  --card: var(--altrion-stone);
+  --card-foreground: var(--altrion-ink);
+  --popover: var(--altrion-parchment);
+  --popover-foreground: var(--altrion-ink);
+  --primary: var(--altrion-ink);
+  --primary-foreground: var(--altrion-parchment);
+  --secondary: var(--altrion-stone);
+  --secondary-foreground: var(--altrion-ink);
+  --muted: var(--altrion-stone);
+  --muted-foreground: rgba(22, 32, 43, 0.68);
+  --accent: var(--altrion-accent);
+  --accent-foreground: var(--altrion-parchment);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: var(--altrion-parchment);
+  --border: var(--altrion-line);
+  --input: var(--altrion-line);
+  --ring: var(--altrion-accent);
+}
+
+@theme inline {
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink: var(--altrion-ink);
+  --color-parchment: var(--altrion-parchment);
+  --color-stone: var(--altrion-stone);
+  --color-brass: var(--altrion-accent);
+  --color-hairline: var(--altrion-line);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--altrion-line);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--altrion-parchment);
+    color: var(--altrion-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    overflow-x: clip;
+    min-width: 0;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ::selection {
+    background: var(--altrion-accent);
+    color: var(--altrion-parchment);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--altrion-accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Small-caps letter-spaced label — recurring micro-typography motif */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+@utility prose-measure {
+  max-width: 34em; /* ~68 characters */
+  line-height: 1.68;
+  text-wrap: pretty;
+}
+
+@utility shell {
+  width: min(90vw, 92rem);
+  margin-inline: auto;
+}
+
+@utility hero-shell {
+  width: min(87vw, 92rem);
+  margin-inline: auto;
+}
+
+@utility hero-overlay {
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--altrion-ink) 88%, transparent) 0%,
+    color-mix(in srgb, var(--altrion-ink) 62%, transparent) 48%,
+    color-mix(in srgb, var(--altrion-ink) 30%, transparent) 100%
+  );
+}
+
+@utility rule-link {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.35em;
+    height: 1px;
+    width: 100%;
+    background: var(--altrion-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+@utility skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  background: var(--altrion-ink);
+  color: var(--altrion-parchment);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: top 200ms ease;
+
+  &:focus {
+    top: 1rem;
+  }
+}
+
+@utility btn-solid {
+  border: 1px solid var(--altrion-ink);
+  background: transparent;
+  color: var(--altrion-ink);
+  transition:
+    background-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 500ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: var(--altrion-ink);
+    color: var(--altrion-parchment);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@utility btn-outline {
+  border: 1px solid currentColor;
+  transition:
+    background-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: var(--altrion-ink);
+    color: var(--altrion-parchment);
+    border-color: var(--altrion-ink);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@utility btn-outline-light {
+  border: 1px solid color-mix(in srgb, var(--altrion-parchment) 60%, transparent);
+  color: var(--altrion-parchment);
+  transition:
+    background-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: var(--altrion-parchment);
+    color: var(--altrion-ink);
+    border-color: var(--altrion-parchment);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@utility field-input {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 1px 0 0 var(--altrion-accent);
+  }
+}
+
+/* Gentle page presence without hiding first paint (avoids blank SSR/hydration flash). */
+.page-shell {
+  animation: page-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0.92;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-shell {
+    animation: none;
+  }
+}
+
+/* Ultra-wide / large desktop breathing room */
+@media (min-width: 1600px) {
+  .shell,
+  .hero-shell {
+    width: min(84vw, 96rem);
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .shell,
+  .hero-shell {
+    width: 92vw;
+  }
+}
